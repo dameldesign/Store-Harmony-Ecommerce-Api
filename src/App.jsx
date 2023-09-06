@@ -14,7 +14,7 @@ const App = () => {
   const [showAddProducts, setShowAddProducts] = useState(false);
 
   async function fetchProducts() {
-    const response = await fetcher("/products");
+    const response = await fetcher("/products?offset=0&size=20");
     console.log(response);
   }
 
