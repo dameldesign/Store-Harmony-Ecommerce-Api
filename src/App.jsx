@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import Header from "./components/header/Header";
 import Search from "./components/search/Search";
@@ -7,15 +8,17 @@ import Button from "./components/button/Button";
 
 import "./App.css";
 import fetcher from "./components/fetcher";
+
 const App = () => {
   const [items, setItem] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const [addedItems, setAddedItem] = useState([]);
   const [showAddProducts, setShowAddProducts] = useState(false);
+  const [products, setProducts] = useState([]);
 
   async function fetchProducts() {
     const response = await fetcher("/products?offset=0&size=20");
-    console.log(response);
+    setProducts(response);
   }
 
   useEffect(() => {
@@ -26,7 +29,7 @@ const App = () => {
     setSearchValue(e.target.value);
   }
   const itmesFilter = items.filter((item) =>
-    item.title.toLowerCase().includes(searchValue.toLowerCase())
+    item.name.toLowerCase().includes(searchValue.toLowerCase())
   );
 
   function addItem(item) {
@@ -66,7 +69,7 @@ const App = () => {
           />
         )}
         <CardBody
-          products={itmesFilter}
+          products={products}
           addItem={addItem}
           removeItem={removeItem}
           addedItems={addedItems}

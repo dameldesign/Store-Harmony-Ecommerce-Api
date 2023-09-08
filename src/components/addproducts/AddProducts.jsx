@@ -2,10 +2,26 @@ import React from "react";
 import CardList from "./CardList";
 import "./AddProducts.css";
 import { useRef } from "react";
+import { useHistory } from "react-router-dom"; // Import useHistory
+
+
+
 const AddProducts = ({ items, click, removeItem, setAddedItem }) => {
+
+  const history = useHistory();
+
+  const handleCheckOut = () => {
+    // Perform any necessary checks before navigating
+    if (items.length >= 1) {
+      // Navigate to the BillingComponent when items exist
+      history.push("../billingaddress/Billing.jsx");
+    }
+  };
+
+
   const total = items
     .reduce((pre, cur) => {
-      return pre + Number(cur.addNumber) * Number(cur.price);
+      return pre + Number(cur.addNumber) * Number(cur.unitPrice);
     }, 0)
     .toFixed(2);
   // let curDate = new Date();
@@ -32,8 +48,8 @@ const AddProducts = ({ items, click, removeItem, setAddedItem }) => {
                 {items.map((item, i) => (
                   <tr key={item.id}>
                     <td>{i + 1}</td>
-                    <td>{item.title}</td>
-                    <td>${item.price}</td>
+                    <td>{item.name}</td>
+                    <td>${item.unitPrice}</td>
                     <td>{item.addNumber}</td>
                   </tr>
                 ))}
@@ -88,11 +104,9 @@ const AddProducts = ({ items, click, removeItem, setAddedItem }) => {
           <div className="check-out">
             <button
               className="check-out-btn"
-              onClick={() => {
-                items.length >= 1 && print();
-              }}
-            >
-              Check Out
+              onClick={handleCheckOut} // Call handleCheckOut when the button is clicked
+      >
+              Check Outt
             </button>
           </div>
         </div>

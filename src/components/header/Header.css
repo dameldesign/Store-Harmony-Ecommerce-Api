@@ -4,7 +4,7 @@ header {
   align-items: center;
 }
 header .header__logo {
-  width: 4rem;
+  width: 3rem;
   animation: rotate 2s linear infinite;
 }
 

@@ -30,7 +30,7 @@ const CardList = ({ item, removeItem, setAddedItem, itemsArr }) => {
 
   return (
     <div className="card-list-body">
-      <img src={item.image} className="card-list-img" alt="" />
+      <img src={item.imageUrl} className="card-list-img" alt="" />
       <button
         className="delete-btn"
         onClick={() => {
@@ -40,10 +40,10 @@ const CardList = ({ item, removeItem, setAddedItem, itemsArr }) => {
       >
         ✘
       </button>
-      <h4>{item.title}</h4>
+      <h4>{item.name}</h4>
       <hr />
       <div className="card-list-add-minu-body">
-        <p>Price : ${item.price}</p>
+        <p>Price : ${item.unitPrice}</p>
         <div className="plus-items-minu">
           <button
             className="plus-btn"

@@ -12,14 +12,17 @@ const Card = ({ product, addItem, removeItem, addedItems }) => {
   // console.log(item);
   return (
     <div className="card">
-      <img className="card__img" src={product.image} alt="" />
+      <img className="card__img" src={product.imageUrl} alt="" />
       <div>
-        <h2>{product.category}</h2>
-        <h4>{product.title}</h4>
+        <h2>{product.name}</h2>
+        <h4>{product.category}</h4>
         <p>{product.description}</p>
       </div>
       <div className="card-price-add">
-        <span>Price : ${product.price}</span>
+        <div></div>
+        <span>Price : ${product.unitPrice}</span> <br/>
+        <span className="each_item"> Available Items:{product.unitsInStock}</span>
+
         <button
           className={isAdded ? "add-item-btn" : "remove-item-btn"}
           onClick={() => {
