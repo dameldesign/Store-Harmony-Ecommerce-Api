@@ -2,24 +2,24 @@ import React from "react";
 import CardList from "./CardList";
 import "./AddProducts.css";
 import { useRef } from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom"
-
-
+import { useNavigate } from "react-router-dom";
 
 const AddProducts = ({ items, click, removeItem, setAddedItem }) => {
-const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const total = items
     .reduce((pre, cur) => {
       return pre + Number(cur.addNumber) * Number(cur.unitPrice);
     }, 0)
     .toFixed(2);
-  // let curDate = new Date();
-  // console.log(curDate);
+
   const showDivRef = useRef(null);
 
-  const orderItems = items.map(item => ({unitPrice:item.unitPrice, quantity:item.addNumber, productId:item.id}))
+  const orderItems = items.map((item) => ({
+    unitPrice: item.unitPrice,
+    quantity: item.addNumber,
+    productId: item.id,
+  }));
 
   return (
     <div ref={showDivRef} className="addproducts__container">
@@ -27,7 +27,7 @@ const navigate = useNavigate()
         <div className="check-out-container">
           <div className="check-out-print">
             <h1 className="check-out-title">Shopping</h1>
-            {/* <p>{curDate}</p> */}
+
             <table>
               <thead>
                 <tr>
@@ -95,11 +95,13 @@ const navigate = useNavigate()
             <h1>${total}</h1>
           </div>
           <div className="check-out">
-            
             <button
               className="check-out-btn"
               onClick={() => {
-                localStorage.setItem("orderItems", JSON.stringify({total, orderItems}))
+                localStorage.setItem(
+                  "orderItems",
+                  JSON.stringify({ total, orderItems })
+                );
                 navigate("/billing");
               }}
             >
@@ -114,14 +116,9 @@ const navigate = useNavigate()
 
 export default AddProducts;
 
-
-
-// import CardList from "./CardList";
 // import "./AddProducts.css";
 // import { useRef } from "react";
 // import { useHistory } from "react-router-dom"; // Import useHistory
-
-
 
 // const AddProducts = ({ items, click, removeItem, setAddedItem }) => {
 
@@ -134,7 +131,6 @@ export default AddProducts;
 //       history.push("../billingaddress/Billing.jsx");
 //     }
 //   };
-
 
 //   const total = items
 //     .reduce((pre, cur) => {

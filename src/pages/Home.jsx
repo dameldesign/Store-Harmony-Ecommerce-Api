@@ -37,11 +37,11 @@ const Home = () => {
     const itemArr = addedItems;
     setAddedItem([...itemArr, item]);
   }
-  // console.log(addedItems);
+
   function removeItem(item) {
     const newItems = addedItems.filter((addedItem) => addedItem.id !== item.id);
     setAddedItem(newItems);
-    // console.log(addedItems);
+
   }
   return (
     <div>
@@ -75,10 +75,6 @@ const Home = () => {
           addedItems={addedItems}
         />
       </div>
-
-      {/* <Router>
-      <Route path="/billing" component={Billing} />
-      </Router> */}
 
       
     </div>

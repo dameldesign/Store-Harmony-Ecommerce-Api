@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import "./Card.css";
-// import { AddRemoveBtn } from "../addremoveBtn/AddRemoveBtn";
 import { useState } from "react";
 const Card = ({ product, addItem, removeItem, addedItems }) => {
   const [isAdded, setIsAdded] = useState(true);
@@ -9,7 +8,7 @@ const Card = ({ product, addItem, removeItem, addedItems }) => {
     item.length == 0 ? setIsAdded(true) : setIsAdded(false);
   }, [item]);
 
-  // console.log(item);
+ 
   return (
     <div className="card">
       <img className="card__img" src={product.imageUrl} alt="" />

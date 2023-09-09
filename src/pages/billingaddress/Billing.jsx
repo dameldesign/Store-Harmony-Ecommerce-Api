@@ -3,10 +3,8 @@ import { postRequest } from "../../components/fetcher";
 import "./Billing.css";
 
 const Billing = () => {
-  const orderItems = JSON.parse(localStorage.getItem("orderItems"))
+  const orderItems = JSON.parse(localStorage.getItem("orderItems"));
   const [formData, setFormData] = useState({
-    // totalQuantity: 0,
-    // totalPrice: 0,
     customerFirstName: "",
     customerLastName: "",
     customerEmail: "",
@@ -28,59 +26,43 @@ const Billing = () => {
     });
   };
 
-  // const handleNestedInputChange = (e, parent) => {
-  //   const { name, value } = e.target;
-  //   setFormData({
-  //     ...formData,
-  //     [parent]: {
-  //       ...formData[parent],
-  //       [name]: value,
-  //     },
-  //   });
-  // };
-
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const dataToSend = {
-          totalQuantity: orderItems.orderItems.map(item => item.quantity).reduce((currentVal, accumulatedValue) => currentVal + accumulatedValue, 0),
-          totalPrice: orderItems.total,
-          orderItems: orderItems.orderItems,
-          customerFirstName: formData.customerFirstName,
-          customerLastName: formData.customerLastName,
-          customerEmail: formData.customerEmail,
-          shippingAddress: {
-            street: formData.shippingStreet,
-            city: formData.shippingCity,
-            state: formData.shippingState,
-            country:formData.shippingCountry,
-          },
-          billingAddress:{
-            street: formData.billingStreet,
-            city: formData.billingCity,
-            state: formData.billingState,
-            country:formData.billingCountry,
-          }
-    }
-    console.log({...dataToSend})
-    const response = await postRequest("/orders", {...dataToSend})
-    console.log(response)
+      totalQuantity: orderItems.orderItems
+        .map((item) => item.quantity)
+        .reduce(
+          (currentVal, accumulatedValue) => currentVal + accumulatedValue,
+          0
+        ),
+      totalPrice: orderItems.total,
+      orderItems: orderItems.orderItems,
+      customerFirstName: formData.customerFirstName,
+      customerLastName: formData.customerLastName,
+      customerEmail: formData.customerEmail,
+      shippingAddress: {
+        street: formData.shippingStreet,
+        city: formData.shippingCity,
+        state: formData.shippingState,
+        country: formData.shippingCountry,
+      },
+      billingAddress: {
+        street: formData.billingStreet,
+        city: formData.billingCity,
+        state: formData.billingState,
+        country: formData.billingCountry,
+      },
+    };
+    console.log({ ...dataToSend });
+    const response = await postRequest("/orders", { ...dataToSend });
+    console.log(response);
     // You can send formData to an API or perform actions here
   };
 
   return (
     <div className="checkout-container">
-      <h1>Checkout Form</h1>
+      <h1 className="text">Checkout Form</h1>
       <form onSubmit={(e) => handleSubmit(e)}>
-        {/* <label>
-          Total Quantity:
-          <input
-            type="number"
-            name="totalQuantity"
-            value={formData.totalQuantity}
-            onChange={handleInputChange}
-          />
-        </label> */}
-        {/* Repeat similar inputs for other fields */}
         <label>
           Customer First Name:
           <input
@@ -110,7 +92,7 @@ const Billing = () => {
         </label>
         <h3>Shipping</h3>
         <label>
-           Street:
+          Street:
           <input
             type="text"
             name="shippingStreet"
@@ -150,7 +132,7 @@ const Billing = () => {
               onChange={(e) => handleInputChange(e)}
             />
           </label>
-          </div>
+        </div>
 
         <label>
           <h3>Billing Address:</h3>
@@ -164,39 +146,37 @@ const Billing = () => {
               onChange={(e) => handleInputChange(e)}
             />
           </label>
-        <div className="sub_label">
-          <label>
-            {" "}
-            city:
-            <input
-              type="text"
-              name="billingCity"
-              value={formData.billingCity}
-              onChange={(e) => handleInputChange(e)}
-            />
-          </label>
-          <label className="label_each">
-            {" "}
-            state:
-            <input
-              type="text"
-              name="billingState"
-              value={formData.billingState}
-              onChange={(e) => handleInputChange(e)}
-            />
-          </label>
-          <label>
-            {" "}
-            country
-            <input
-              type="text"
-              name="billingCountry"
-              value={formData.billingCountry}
-              onChange={(e) => handleInputChange(e)}
-            />
-          </label>
-
-
+          <div className="sub_label">
+            <label>
+              {" "}
+              city:
+              <input
+                type="text"
+                name="billingCity"
+                value={formData.billingCity}
+                onChange={(e) => handleInputChange(e)}
+              />
+            </label>
+            <label className="label_each">
+              {" "}
+              state:
+              <input
+                type="text"
+                name="billingState"
+                value={formData.billingState}
+                onChange={(e) => handleInputChange(e)}
+              />
+            </label>
+            <label>
+              {" "}
+              country
+              <input
+                type="text"
+                name="billingCountry"
+                value={formData.billingCountry}
+                onChange={(e) => handleInputChange(e)}
+              />
+            </label>
           </div>
         </label>
 
