@@ -28,7 +28,7 @@ const Home = () => {
   function changingSrarchData(e) {
     setSearchValue(e.target.value);
   }
-  const itmesFilter = items.filter((item) =>
+  const itemsFilter = products.filter((item) =>
     item.name.toLowerCase().includes(searchValue.toLowerCase())
   );
 
@@ -69,7 +69,7 @@ const Home = () => {
           />
         )}
         <CardBody
-          products={products}
+          products={itemsFilter}
           addItem={addItem}
           removeItem={removeItem}
           addedItems={addedItems}
