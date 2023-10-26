@@ -1,5 +1,7 @@
 import React, { useReducer, useEffect } from "react";
 import "./CardList.css";
+
+
 function reducer(state, action) {
   // console.log(state);
   if (action.type === "INCREASE") {

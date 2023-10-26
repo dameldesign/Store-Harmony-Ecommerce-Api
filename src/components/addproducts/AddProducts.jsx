@@ -2,15 +2,24 @@ import React from "react";
 import CardList from "./CardList";
 import "./AddProducts.css";
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
+
 const AddProducts = ({ items, click, removeItem, setAddedItem }) => {
+  const navigate = useNavigate();
+
   const total = items
     .reduce((pre, cur) => {
       return pre + Number(cur.addNumber) * Number(cur.price);
     }, 0)
     .toFixed(2);
-  // let curDate = new Date();
-  // console.log(curDate);
+
   const showDivRef = useRef(null);
+
+  const orderItems = items.map((item) => ({
+    unitPrice: item.unitPrice,
+    quantity: item.addNumber,
+    productId: item.id,
+  }));
 
   return (
     <div ref={showDivRef} className="addproducts__container">
@@ -18,7 +27,7 @@ const AddProducts = ({ items, click, removeItem, setAddedItem }) => {
         <div className="check-out-container">
           <div className="check-out-print">
             <h1 className="check-out-title">Shopping</h1>
-            {/* <p>{curDate}</p> */}
+
             <table>
               <thead>
                 <tr>
@@ -90,6 +99,11 @@ const AddProducts = ({ items, click, removeItem, setAddedItem }) => {
               className="check-out-btn"
               onClick={() => {
                 items.length >= 1 && print();
+                localStorage.setItem(
+                  "orderItems",
+                  JSON.stringify({ total, orderItems })
+                );
+                navigate("/billing");
               }}
             >
               Check Out
